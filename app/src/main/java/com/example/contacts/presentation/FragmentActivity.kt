@@ -36,14 +36,16 @@ class FragmentActivity : AppCompatActivity(), FragmentNavigator {
         super.onBackPressed()
         if (supportFragmentManager.backStackEntryCount == 0) {
             finish()
+        } else {
+            goFromContactFragmentToContactListFragment()
         }
     }
 
     override fun goFromContactListFragmentToContactFragment(contactId: Int) {
-        val fragmentContainer = if (binding.fragmentContainerForContact == null) {
+        val fragmentContainer = if (binding.fragmentContainerForTablet == null) {
             R.id.fragment_container
         } else {
-            R.id.fragment_container_for_contact
+            R.id.fragment_container_for_tablet
         }
         supportFragmentManager.beginTransaction().run {
             val fragment = ContactFragment()

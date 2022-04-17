@@ -27,7 +27,7 @@
        app:layout_constraintGuide_percent="0.5"/>
 
    <FrameLayout
-       android:id="@+id/fragment_container_for_contact"
+       android:id="@+id/fragment_container_for_tablet"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
        app:layout_constraintBottom_toBottomOf="parent"

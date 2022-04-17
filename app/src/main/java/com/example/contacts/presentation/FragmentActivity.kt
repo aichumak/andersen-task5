@@ -40,12 +40,17 @@ class FragmentActivity : AppCompatActivity(), FragmentNavigator {
     }
 
     override fun goFromContactListFragmentToContactFragment(contactId: Int) {
+        val fragmentContainer = if (binding.fragmentContainerForContact == null) {
+            R.id.fragment_container
+        } else {
+            R.id.fragment_container_for_contact
+        }
         supportFragmentManager.beginTransaction().run {
             val fragment = ContactFragment()
             fragment.arguments = Bundle().apply {
                 putInt(ContactFragment.CONTACT_ID, contactId)
             }
-            replace(R.id.fragment_container, fragment, ContactFragment.FRAGMENT_CONTACT_TAG)
+            replace(fragmentContainer, fragment, ContactFragment.FRAGMENT_CONTACT_TAG)
             addToBackStack(ContactFragment.FRAGMENT_CONTACT_TAG)
             commit()
         }

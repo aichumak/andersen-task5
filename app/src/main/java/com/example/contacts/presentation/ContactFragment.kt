@@ -12,8 +12,8 @@ import com.example.contacts.databinding.FragmentContactEditableBinding
 import com.example.contacts.domain.Contact
 
 class ContactFragment : Fragment(R.layout.fragment_contact_editable) {
-    var binding: FragmentContactEditableBinding? = null
-    var viewModel: ContactViewModel? = null
+    private var binding: FragmentContactEditableBinding? = null
+    private var viewModel: ContactViewModel? = null
     private var fragmentNavigator: FragmentNavigator? = null
 
     override fun onAttach(context: Context) {

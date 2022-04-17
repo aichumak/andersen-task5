@@ -1,7 +1,5 @@
 package com.example.contacts.presentation
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.contacts.R
@@ -15,11 +13,29 @@ class FragmentActivity : AppCompatActivity(), FragmentNavigator {
         binding = ActivityFragmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction().run {
-            val fragment = ContactListFragment.newInstance()
-            replace(R.id.fragment_container, fragment, ContactListFragment.FRAGMENT_CONTACT_LIST)
-            addToBackStack(ContactListFragment.FRAGMENT_CONTACT_LIST)
-            commit()
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            supportFragmentManager.beginTransaction().run {
+                val fragment = ContactListFragment.newInstance()
+                replace(
+                    R.id.fragment_container,
+                    fragment,
+                    ContactListFragment.FRAGMENT_CONTACT_LIST
+                )
+                addToBackStack(ContactListFragment.FRAGMENT_CONTACT_LIST)
+                commit()
+            }
+        } else {
+            val index = supportFragmentManager.backStackEntryCount - 1
+            val backEntry = supportFragmentManager.getBackStackEntryAt(index)
+            val tag = backEntry.name
+            supportFragmentManager.popBackStack(tag, 0)
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            finish()
         }
     }
 
@@ -37,10 +53,5 @@ class FragmentActivity : AppCompatActivity(), FragmentNavigator {
 
     override fun goFromContactFragmentToContactListFragment() {
         supportFragmentManager.popBackStack(ContactListFragment.FRAGMENT_CONTACT_LIST, 0)
-    }
-
-    companion object {
-        fun newIntent(context: Context) = Intent(context, FragmentActivity::class.java)
-
     }
 }

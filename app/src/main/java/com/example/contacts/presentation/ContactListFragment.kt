@@ -64,11 +64,6 @@ class ContactListFragment : Fragment(R.layout.fragment_contact_list) {
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        activity?.finish()
-    }
-
     companion object {
         val FRAGMENT_CONTACT_LIST = "FRAGMENT_CONTACT_LIST"
         fun newInstance() = ContactListFragment()
